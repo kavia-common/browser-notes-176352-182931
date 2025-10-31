@@ -4,20 +4,18 @@ import App from './App';
 describe('App initial render and accessibility', () => {
   test('renders theme toggle button with accessible label', () => {
     render(<App />);
-    // Button should have an accessible label describing the action
     const toggleBtn = screen.getByRole('button', { name: /switch to dark mode|switch to light mode/i });
     expect(toggleBtn).toBeInTheDocument();
   });
 
-  test('renders Learn React link with correct role and href', () => {
+  test('renders sidebar with New Note button and search', () => {
     render(<App />);
-    const link = screen.getByRole('link', { name: /learn react/i });
-    expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute('href', 'https://reactjs.org');
+    expect(screen.getByRole('button', { name: /new note/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /search notes/i })).toBeInTheDocument();
   });
 
-  test('shows current theme text', () => {
+  test('renders editor empty state initially', () => {
     render(<App />);
-    expect(screen.getByText(/current theme:/i)).toBeInTheDocument();
+    expect(screen.getByRole('region', { name: /note editor/i })).toBeInTheDocument();
   });
 });
